@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db-noticias
+  labels:
+    app: db-noticias
+spec:
+  containers:
+    - name: db-noticias-container
+      image: aluracursos/mysql-db:1
+      ports:
+        - containerPort: 3306
+      envFrom: # This is the new field that we are using to get the values from the ConfigMap
+        - configMapRef:
+            name: db-configmap
+      # env: directly set the values in the Pod definition
+      #   - name: MYSQL_ROOT_PASSWORD
+      #     value: 'q1w2e3r4'
+      #   - name: MYSQL_DATABASE
+      #     value: 'empresa'
+      #   - name: MYSQL_PASSWORD
+      #     value: 'q1w2e3r4'
